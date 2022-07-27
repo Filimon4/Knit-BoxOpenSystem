@@ -5,6 +5,10 @@ local Controll = Knit.CreateService{
     Client = {}
 }
 
+function Controll.Client:Add(player, num)
+    return num*2
+end
+
 function Controll:TestMoney()
     local allow = true
     while allow do
@@ -20,7 +24,7 @@ end
 
 function Controll:KnitStart()
     task.wait(2)
-    self:TestMoney()
+    --self:TestMoney()
 end
 
 return Controll
