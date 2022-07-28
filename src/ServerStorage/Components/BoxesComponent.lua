@@ -41,7 +41,6 @@ end
 function BoxesComponent:Construct()
     self.Win = math.random(50, 1000)
     self._trove = Trove.new()
-    self._signal = Signal.new()
 end
 
 function BoxesComponent:Start()
