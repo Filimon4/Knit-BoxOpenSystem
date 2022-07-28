@@ -25,6 +25,7 @@ local BoxesComponent = Component.new{
 function BoxesComponent:Player_Win(plr)
     local money = plr.leaderstats:FindFirstChild("Money")
     if money then
+        -- i have to use Comm to fire Remote Event with spin effect on client, tomorrow
         money.Value += self.Win
         self:Exit()
     end
