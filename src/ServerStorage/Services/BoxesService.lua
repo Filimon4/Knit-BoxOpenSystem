@@ -13,10 +13,11 @@ local GameStart = Knit.CreateService{
 }
 
 function GameStart:Create()
-    for i=0,MaxBoxes do
+    BoxesFolder:ClearAllChildren()
+    for i=1,MaxBoxes do
         local Box_Clone = Box:Clone()
         Box_Clone.Parent = BoxesFolder
-        Box_Clone:MoveTo(Vector3.new(math.random(-210,230), game.Workspace.Baseplate.Position.Y + 2, math.random(-210,230)))
+        Box_Clone:MoveTo(Vector3.new(math.random(-210,230), 3, math.random(-210,230)))
         CollectionService:AddTag(Box_Clone, "Box")
     end
 end

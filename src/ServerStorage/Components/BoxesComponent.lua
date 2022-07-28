@@ -3,7 +3,7 @@ local Players = game:GetService("Players")
 
 local Knit = require(ReplicatedStorage.Packages.Knit)
 local Component = require(ReplicatedStorage.Packages.Component)
-local Signal = require(ReplicatedStorage.Packages.Signal)
+local Trove = require(ReplicatedStorage.Packages.Trove)
 
 local BoxesFolder = game.Workspace:WaitForChild('Boxes')
 
@@ -22,26 +22,37 @@ local BoxesComponent = Component.new{
     Extensions = Loger
 }
 
+function BoxesComponent:Player_Win(plr)
+    local money = plr.leaderstats:FindFirstChild("Money")
+    if money then
+        money.Value += self.Win
+        self:Exit()
+    end
+end
+
 function BoxesComponent:onTouched(hit)
     local plr = Players:GetPlayerFromCharacter(hit.Parent)
     if plr then
-        print(plr.Name)
+        print(plr.Name .. " win " .. tostring(self.Win))
+        self:Player_Win(plr)
     end
 end
 
 function BoxesComponent:Construct()
-    print('Constructing')
     self.Win = math.random(50, 1000)
+    self._trove = Trove.new()
+    self._signal = Signal.new()
 end
 
 function BoxesComponent:Start()
-    self.Instance.PrimaryPart.Touched:Connect(function(hit)
+    self._trove:AttachToInstance(self.Instance) -- When Instance will destroy the Trove will destroy itself
+    self._trove:Add(self.Instance.PrimaryPart.Touched:Connect(function(hit) -- Add taker on Function
         self:onTouched(hit)
-    end)
+    end))
 end
 
-function BoxesComponent:Stop()
-    print('Stop')
+function BoxesComponent:Exit()
+    self.Instance:Destroy()
 end
 
 return BoxesComponent
