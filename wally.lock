@@ -5,7 +5,7 @@ registry = "test"
 [[package]]
 name = "1/knitexamples"
 version = "0.1.0"
-dependencies = [["Component", "sleitnick/component@2.4.6"], ["Knit", "sleitnick/knit@1.4.7"], ["Signal", "sleitnick/signal@1.2.1"], ["Trove", "sleitnick/trove@0.5.0"]]
+dependencies = [["Comm", "sleitnick/comm@0.3.1"], ["Component", "sleitnick/component@2.4.6"], ["Knit", "sleitnick/knit@1.4.7"], ["Signal", "sleitnick/signal@1.2.1"], ["Trove", "sleitnick/trove@0.5.0"]]
 
 [[package]]
 name = "evaera/promise"

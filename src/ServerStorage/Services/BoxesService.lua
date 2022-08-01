@@ -1,4 +1,3 @@
-local LocalizationService = game:GetService("LocalizationService")
 local Knit = require(game:GetService("ReplicatedStorage").Packages.Knit)
 local CollectionService = game:GetService("CollectionService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")

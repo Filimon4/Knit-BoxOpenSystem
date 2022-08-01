@@ -5,6 +5,7 @@ local Knit = require(ReplicatedStorage.Packages.Knit)
 local Component = require(ReplicatedStorage.Packages.Component)
 local Trove = require(ReplicatedStorage.Packages.Trove)
 
+
 local BoxesFolder = game.Workspace:WaitForChild('Boxes')
 
 local BoxesInfo = require(script.Parent.Parent.Modules.BoxesInfo)
