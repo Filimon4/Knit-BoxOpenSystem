@@ -1,17 +1,18 @@
 local Knit = require(game:GetService("ReplicatedStorage").Packages.Knit)
 local CollectionService = game:GetService("CollectionService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ServerComm = require(ReplicatedStorage.Packages.Comm).ServerComm
 
 local BoxesFolder = game.Workspace:WaitForChild('Boxes')
 local Box = ReplicatedStorage.Props:WaitForChild("Box")
 local MaxBoxes = 25
 
-local GameStart = Knit.CreateService{
-    Name = "GameStart",
+local BoxService = Knit.CreateService{
+    Name = "BoxService",
     Client = {}
 }
 
-function GameStart:Create()
+function BoxService:Create()
     BoxesFolder:ClearAllChildren()
     for i=1,MaxBoxes do
         local Box_Clone = Box:Clone()
@@ -21,8 +22,17 @@ function GameStart:Create()
     end
 end
 
-function GameStart:KnitStart()
+function BoxService:FireClient(player,reward)
+    self.ServerSignal:Fire(player,reward)
+end
+
+function BoxService:KnitInit()
+    self.ServerEvent = ServerComm.new(game.ReplicatedStorage, "Spin")
+    self.ServerSignal = self.ServerEvent:CreateSignal("SpinerSignal")
+end
+
+function BoxService:KnitStart()
     self:Create()
 end
 
-return GameStart
+return BoxService

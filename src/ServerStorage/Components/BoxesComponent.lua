@@ -26,7 +26,7 @@ local BoxesComponent = Component.new{
 function BoxesComponent:Player_Win(plr)
     local money = plr.leaderstats:FindFirstChild("Money")
     if money then
-        -- i have to use Comm to fire Remote Event with spin effect on client, tomorrow
+        self.BoxService:FireClient(plr,self.Win)
         money.Value += self.Win
         self:Exit()
     end
@@ -46,6 +46,7 @@ function BoxesComponent:Construct()
 end
 
 function BoxesComponent:Start()
+    self.BoxService = Knit.GetService('BoxService')
     self._trove:AttachToInstance(self.Instance) -- When Instance will destroy the Trove will destroy itself
     self._trove:Add(self.Instance.PrimaryPart.Touched:Connect(function(hit) -- Add taker on Function
         self:onTouched(hit)
